@@ -1,4 +1,4 @@
-# AWS EC2 Run Instance Action
+# Generate SSH Key Action
 
 [![LICENSE](https://img.shields.io/badge/license-BSD3-green)](LICENSE)
 [![Latest Release](https://img.shields.io/github/v/release/truemark/generate-ssh-key-action)](https://github.com/truemark/generate-ssh-key-action/releases)
@@ -13,7 +13,7 @@ GitHub action used to generate an SSH key pair
 ```yml
       - name: Generate SSH Key
         id: ssh-key
-        uses: truemark/generate-ssh-key-action@v1
+        uses: truemark/generate-ssh-key-action@v2
 ```
 
 ## Inputs

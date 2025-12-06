@@ -15,10 +15,32 @@ jobs:
           npm install
       - run: |
           npm run all
-#  test: # make sure the action works on a clean machine without building
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: ./
-#        with:
-#          milliseconds: 1000
+  test: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Generate RSA SSH Key
+        id: generate-ssh-key-rsa
+        uses: ./
+        with:
+          type: rsa
+      - name: Echo RSA
+        run: |
+          echo "Public Key: ${{ steps.generate-ssh-key-rsa.outputs.public-key-path }}"
+          cat ${{ steps.generate-ssh-key-rsa.outputs.public-key-path }}
+          echo "Private Key: ${{ steps.generate-ssh-key-rsa.outputs.private-key-path }}"
+          cat ${{ steps.generate-ssh-key.outputs.private-key-path }}
+          echo "Public Key Variable: ${{ steps.generate-ssh-key-rsa.outputs.public-key }}"
+      - name: Generate ECDSA SSH Key
+        id: generate-ssh-key-ecdsa
+        uses: ./
+        with:
+          type: ecdsa
+      - name: Echo ECDSA
+        run: |
+          echo "Public Key: ${{ steps.generate-ssh-key-ecdsa.outputs.public-key-path }}"
+          cat ${{ steps.generate-ssh-key-ecdsa.outputs.public-key-path }}
+          echo "Private Key: ${{ steps.generate-ssh-key-ecdsa.outputs.private-key-path }}"
+          cat ${{ steps.generate-ssh-key-ecdsa.outputs.private-key-path }}
+          echo "Public Key Variable: ${{ steps.generate-ssh-key-ecdsa.outputs.public-key }}"
